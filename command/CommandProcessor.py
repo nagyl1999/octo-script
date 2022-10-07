@@ -15,6 +15,8 @@ Single source of truth for available commands.
 from queue import LifoQueue
 from command import HelpCommand
 from command import ExitCommand
+from command import ListStrategyCommand
+from command import SelectStrategyCommand
 from command.ICommand import ICommand
 
 
@@ -27,7 +29,9 @@ class CommandProcessor:
         self.stack = LifoQueue(maxsize=CommandProcessor.MAX_SIZE)
         self.commands: dict[str, ICommand] = {
             'help': HelpCommand.HelpCommand(self),
-            'exit': ExitCommand.ExitCommand()
+            'exit': ExitCommand.ExitCommand(),
+            'list-strategy': ListStrategyCommand.ListStrategyCommand(),
+            'select-strategy': SelectStrategyCommand.SelectStrategyCommand()
         }
 
     def execute(self, command: ICommand, cmd: str) -> None:

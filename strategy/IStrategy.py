@@ -6,7 +6,8 @@
 All available strategies must be realizing the
 IStrategy interface. There is a way to get settings,
 available sports to personalize execution. All strategies
-should save its result into some file.
+should save its result into some file. It should return
+the strategy's name.
 
 @Author: nagyl
 @Date:   2022.10.07.

@@ -6,11 +6,16 @@
 This singleton object will contain all
 relevant information about our workspace.
 E.g.: Selected strategy, its settings, etc.
+Acts as a single source of truth for available
+strategies.
 
 @Author: nagyl
 @Date:   2022.10.07.
 
 """
+
+from strategy.predictor import PredictorFacade
+from strategy.IStrategy import IStrategy
 
 
 class Workspace(object):
@@ -25,4 +30,7 @@ class Workspace(object):
 
     def __init__(self) -> None:
         """ Workspace data """
-        self.strategy = None
+        self.strategy: IStrategy | None = None
+        self.strategies: dict[str, IStrategy] = {
+            'scores-predictor': PredictorFacade.PredictorFacade()
+        }
