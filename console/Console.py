@@ -10,6 +10,7 @@ Provides a User Interface through the command line.
 
 """
 
+from command import HelpCommand
 from command import ExitCommand
 from command import CommandProcessor
 
@@ -19,7 +20,8 @@ class Console:
     welcome = 'Welcome to OctoScript!'
     message = 'Command: '
     commands = {
-        'exit': ExitCommand.ExitCommand()
+        'exit': ExitCommand.ExitCommand(),
+        'help': HelpCommand.HelpCommand()
     }
 
     def __init__(self):
