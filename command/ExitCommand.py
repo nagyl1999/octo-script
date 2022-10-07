@@ -17,7 +17,8 @@ from command.ICommand import ICommand
 
 class ExitCommand(ICommand):
     """ Exit Command """
-    message = 'Bye!'
+    message: str = 'Bye!'
+    help_message: str = 'Exits application'
 
     def execute(self, command: str) -> None:
         """ Closes the application with an exit message """
@@ -27,3 +28,7 @@ class ExitCommand(ICommand):
     def unexecute(self) -> None:
         """ There is no unexecution from exiting """
         pass
+
+    def help(self) -> None:
+        """ Help message """
+        print(ExitCommand.help_message)

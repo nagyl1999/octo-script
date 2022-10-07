@@ -17,14 +17,14 @@ should save its result into some file.
 class IStrategy:
     """ IStrategy Interface """
 
-    def get_settings(self):
+    def get_settings(self) -> dict:
         """ Returns the realizing strategy's settings """
         pass
 
-    def get_sports(self):
+    def get_sports(self) -> list[str]:
         """ Returns the realizing strategy's available sports """
         pass
 
-    def execute(self):
+    def execute(self) -> None:
         """ Execute strategy """
         pass

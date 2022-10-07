@@ -10,31 +10,25 @@ Provides a User Interface through the command line.
 
 """
 
-from command import HelpCommand
-from command import ExitCommand
 from command import CommandProcessor
 
 
 class Console:
     """ Command Line UI """
-    welcome = 'Welcome to OctoScript!'
-    message = 'Command: '
-    commands = {
-        'exit': ExitCommand.ExitCommand(),
-        'help': HelpCommand.HelpCommand()
-    }
+    welcome: str = 'Welcome to OctoScript!'
+    message: str = 'Command: '
 
-    def __init__(self):
+    def __init__(self) -> None:
         """ Initiating Command Processor """
         self.command_processor = CommandProcessor.CommandProcessor()
 
-    def serve(self):
+    def serve(self) -> None:
         """ Serving as Front-End """
         print(Console.welcome, end='\n\n')
         while True:
             full_command = input(Console.message).strip()
             command = full_command.lower().split(' ')[0]
-            if command not in Console.commands:
+            if command not in self.command_processor.commands:
                 print(f'Error: command {command} not found!')
                 continue
-            self.command_processor.execute(Console.commands.get(command), full_command)
+            self.command_processor.execute(self.command_processor.commands.get(command), full_command)

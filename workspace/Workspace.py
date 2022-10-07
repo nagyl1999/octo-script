@@ -15,14 +15,14 @@ E.g.: Selected strategy, its settings, etc.
 
 class Workspace(object):
     """ Singleton Workspace object """
-    instance = None
+    instance: 'Workspace' = None
 
-    def __new__(cls):
+    def __new__(cls) -> 'Workspace':
         """ Singleton pattern """
         if cls.instance is None:
             cls.instance = super(Workspace, cls).__new__(cls)
         return cls.instance
 
-    def __init__(self):
+    def __init__(self) -> None:
         """ Workspace data """
         self.strategy = None
