@@ -35,5 +35,6 @@ class Console:
             full_command = input(Console.message).strip()
             command = full_command.lower().split(' ')[0]
             if command not in Console.commands:
-                continue  # TODO error handling
+                print(f'Error: command {command} not found!')
+                continue
             self.command_processor.execute(Console.commands.get(command), full_command)
