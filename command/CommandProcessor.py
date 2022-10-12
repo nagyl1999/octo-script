@@ -16,6 +16,7 @@ from queue import LifoQueue
 from command import HelpCommand
 from command import ExitCommand
 from command import ListStrategyCommand
+from command import ShowStrategyCommand
 from command import SelectStrategyCommand
 from command.ICommand import ICommand
 
@@ -31,6 +32,7 @@ class CommandProcessor:
             'help': HelpCommand.HelpCommand(self),
             'exit': ExitCommand.ExitCommand(),
             'list-strategy': ListStrategyCommand.ListStrategyCommand(),
+            'show-strategy': ShowStrategyCommand.ShowStrategyCommand(),
             'select-strategy': SelectStrategyCommand.SelectStrategyCommand()
         }
 

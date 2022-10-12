@@ -15,6 +15,7 @@ from strategy.IStrategy import IStrategy
 
 class PredictorFacade(IStrategy):
     """ Facade for scores predictor """
+    name = 'scores-predictor'
 
     def get_settings(self) -> dict:
         """ Returns settings """
@@ -23,6 +24,10 @@ class PredictorFacade(IStrategy):
     def get_sports(self) -> list[str]:
         """ Returns available sports """
         pass
+
+    def get_name(self) -> str:
+        """ Returns the name of the strategy """
+        return PredictorFacade.name
 
     def execute(self) -> None:
         """ Execute strategy """

@@ -26,6 +26,9 @@ class IStrategy:
         """ Returns the realizing strategy's available sports """
         pass
 
+    def get_name(self) -> str:
+        """ Returns the realizing strategy's name """
+
     def execute(self) -> None:
         """ Execute strategy """
         pass
