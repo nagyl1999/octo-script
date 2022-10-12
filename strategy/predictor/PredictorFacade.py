@@ -11,7 +11,6 @@ Acts as a facade for strategy scores predictor.
 """
 
 import datetime
-from pprint import pprint
 
 from strategy.IStrategy import IStrategy
 from strategy.predictor.PredictorLeague import PredictorLeague
@@ -22,7 +21,7 @@ class PredictorFacade(IStrategy):
     name = 'scores-predictor'
     settings: dict = {
         'date': datetime.datetime.now().strftime("%Y-%m-%d"),
-        'sports': ['NCAAF']
+        'sports': []
     }
 
     def __init__(self):
@@ -31,7 +30,7 @@ class PredictorFacade(IStrategy):
 
     def get_settings(self) -> dict:
         """ Returns settings """
-        return PredictorLeague.settings
+        return PredictorFacade.settings
 
     def get_sports(self) -> list[str]:
         """ Returns available sports """
@@ -51,4 +50,4 @@ class PredictorFacade(IStrategy):
 
     def execute(self) -> None:
         """ Execute strategy """
-        events = self.league.execute(PredictorFacade.settings)
+        events = self.league.execute(PredictorFacade.settings)  # TODO - handle events
