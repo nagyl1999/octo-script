@@ -12,9 +12,13 @@ be singleton due to restricted number of logins.
 
 """
 
+import os
+import dotenv
 import logging
 import requests
 import datetime
+
+dotenv.load_dotenv()
 
 
 class Session(requests.Session):
@@ -33,10 +37,10 @@ class Session(requests.Session):
     def __init__(self) -> None:
         """ Inicializing credentials """
         self.credentials = {
-            'emailaddress': '',
-            'password': '',
+            'emailaddress': os.environ.get('ZCODE_EMAIL'),
+            'password': os.environ.get('ZCODE_PASSWORD'),
             'json_result': 1
-        }  # TODO - .env results
+        }
         self.login()
 
     def login(self) -> None:
