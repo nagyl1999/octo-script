@@ -3,28 +3,64 @@
 
 """ ZCode API
 
-This object will provide an API to
-the ZCode System. Credentials are
-required within the .env file.
+This object will provide an API to the ZCode System.
+Credentials are required within the .env file. Must
+be singleton due to restricted number of logins.
 
 @Author: nagyl
 @Date:   2022.10.09.
 
 """
 
+import logging
 import requests
+import datetime
 
 
 class Session(requests.Session):
-    """ ZCode Session """
-    url_login = 'https://zcodesystem.com/vipclub/do_login.php'
-    url_logout = 'https://zcodesystem.com/vipclub/logout.php'
-    url_scorespredictor = 'https://zcodesystem.com/scorespredictor/score_games_list_n1.php'
+    """ Singleton ZCode Session """
+    instance: 'Session' = None
+    url_login: str = 'https://zcodesystem.com/vipclub/do_login.php'
+    url_logout: str = 'https://zcodesystem.com/vipclub/logout.php'
+    url_scorespredictor: str = 'https://zcodesystem.com/scorespredictor/score_games_list_n1.php'
 
-    def __init__(self):
-        """ Inicializing credentials, login """
+    def __new__(cls) -> 'Session':
+        """ Singleton pattern """
+        if cls.instance is None:
+            cls.instance = super(Session, cls).__new__(cls)
+        return cls.instance
+
+    def __init__(self) -> None:
+        """ Inicializing credentials """
         self.credentials = {
             'emailaddress': '',
             'password': '',
             'json_result': 1
-        } # TODO - .env results
+        }  # TODO - .env results
+        self.login()
+
+    def login(self) -> None:
+        """ Log into ZCode """
+        response = self.post(Session.url_login, data=self.credentials)
+        try:
+            if 'success' not in response.json():
+                logging.critical('Critical error: cannot login!')
+        except Exception as e:
+            logging.critical(e)
+
+    def logout(self) -> None:
+        """ Logout from ZCode """
+        self.post(Session.url_logout)
+
+    def get_scores_predictor(self, sport: str, date: str = None) -> dict:
+        """ Get data from scores predictor feature """
+        if date is None:
+            date = datetime.datetime.now().strftime("%Y-%m-%d")
+        data = {
+            'current_sport': sport.upper(),
+            'current_sport2': '',
+            'current_league': '',
+            'current_date': date,
+            'force_get_json': 1
+        }
+        return self.post(Session.url_scorespredictor, data=data).json()
