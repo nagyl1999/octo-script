@@ -30,6 +30,7 @@ class ShowStrategyCommand(ICommand):
             print(ShowStrategyCommand.error_message)
             return None
         print(f'Selected strategy: {self.workspace.strategy.get_name()}')
+        self.workspace.strategy.execute()
 
     def unexecute(self) -> None:
         """ There is no unexecution from printing """

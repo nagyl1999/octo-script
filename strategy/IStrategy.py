@@ -26,8 +26,17 @@ class IStrategy:
         """ Returns the realizing strategy's available sports """
         pass
 
+    def add_sport(self, sport: str) -> None:
+        """ Sport > Settings """
+        pass
+
+    def remove_sport(self, sport: str) -> None:
+        """ Removes sport from settings """
+        pass
+
     def get_name(self) -> str:
         """ Returns the realizing strategy's name """
+        pass
 
     def execute(self) -> None:
         """ Execute strategy """
