@@ -21,7 +21,7 @@ class PredictorFacade(IStrategy):
     name = 'scores-predictor'
     settings: dict = {
         'date': datetime.datetime.now().strftime("%Y-%m-%d"),
-        'sports': []
+        'sports': ['NCAAF']
     }
 
     def __init__(self):
@@ -51,3 +51,5 @@ class PredictorFacade(IStrategy):
     def execute(self) -> None:
         """ Execute strategy """
         events = self.league.execute(PredictorFacade.settings)  # TODO - handle events
+        from pprint import pprint
+        pprint(events)

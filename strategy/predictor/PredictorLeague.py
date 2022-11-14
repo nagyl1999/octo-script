@@ -11,7 +11,6 @@ specific leagues.
 
 """
 
-import datetime
 from zcode.ZCode import Session
 from bs4 import BeautifulSoup
 
@@ -23,6 +22,7 @@ class PredictorLeague:
     def __init__(self) -> None:
         """ Inicializing ZCode API """
         self.zcode: Session = Session()
+        self.events = list()
         self.signals: dict[str, dict] = {}
 
     def execute(self, settings: dict) -> dict:
